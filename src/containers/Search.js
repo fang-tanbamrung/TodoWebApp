@@ -1,41 +1,56 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { isSearchClick, showSearh } from '../actions';
 
-const mapDispathToProps = (dispath) => {
+import { connect } from 'react-redux';
+import { showDateSearh, dateSearch, showTextSearch, todoSearch } from '../actions/search.action';
+
+const mapDispathToProps = (dispatch) => {
     return{
-        handleClick:() => dispath(showSearh()),
-        handleSearch:(date) => dispath(isSearchClick(date))
+        handleDateClick:() => dispatch(showDateSearh()),
+        handleDateSearch:(date) => dispatch(dateSearch(date)),
+        handleTextSearch:(text) => dispatch(todoSearch(text)),
+        handleTextClick:() => dispatch(showTextSearch())
     }
 }
 
 const mapStateToProps = (state) => {
     return{
-        isClick:state.Search.showSearch
+        showDateSearh:state.Search.showDateSearch,
+        showTextSearch:state.Search.showTextSearch
     }
 }
 
 
 const Search = props => { 
-    const {handleClick, isClick, handleSearch} = props
+    const {handleTextClick, handleDateClick, handleTextSearch, showTextSearch, showDateSearh, handleDateSearch} = props
     let date
     return(
         <div className = 'ma3'>
-            <button className='br2 pointer dim' onClick={handleClick}>
+            <button className='br2 pointer dim' onClick={handleDateClick}>
                 {'Search Due date'}
             </button>
-            <button className = 'br2 ml2 pointer dim' onClick={() => handleSearch('')}>
+            <button className='br2 ml2 pointer dim' onClick={handleTextClick}>
+                {'Search Todo'}
+            </button>
+            <button className = 'br2 ml2 pointer dim' onClick={() => {
+                handleDateSearch('')
+                handleTextSearch('')
+                if(showDateSearh){
+                    handleDateClick()
+                }
+                if(showTextSearch){
+                    handleTextClick()
+                }
+                }}>
                 {'Show all'}
             </button>
-            {isClick?
+            {showDateSearh?
             <div>
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     if(!date.value){
                         return
                     }
-                    handleSearch(date.value)
-                    // date.value = ''
+                    handleDateSearch(date.value)
                 }}>
                     <input className='mt2 mr2 br-pill' type='date' ref={node => date=node}/>
                     <button className='br2 dim pointer'>
@@ -43,6 +58,11 @@ const Search = props => {
                     </button>
                 </form>
             </div>
+            :''}
+            {showTextSearch?
+            <div>
+                <input className='mt2 br2' onChange = {event => handleTextSearch(event.target.value)}/>
+            </div> 
             :''}
         </div>
     )

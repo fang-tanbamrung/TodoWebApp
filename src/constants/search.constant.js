@@ -1,0 +1,6 @@
+export const searchConstants = {
+    SHOW_DATE_SEARCH : 'SHOW_DATE_SEARCH',
+    SHOW_TEXT_SEARCH : 'SHOW_TEXT_SEARCH',
+    DATE_SEARCH : 'DATE_SEARCH',
+    TODO_SEARCH : 'TODO_SEARCH'
+}

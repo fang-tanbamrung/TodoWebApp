@@ -1,16 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {toggleState, delTodo} from '../actions';
-import { DONE_FILTER, TODO_FILTER, DUE_DATE_FILTER } from '../constants';
+import { connect } from 'react-redux';
+
+import { toggleState, delTodo } from '../actions/todo.actions';
+import { filterConstants } from '../constants/filter.constants';
 import List from '../components/List';
-import NavBar from '../components/header/NavBar';
 import AddForm from './AddForm';
-import {isDoneFilter, dueDateFilter} from './filter';
+import { isDoneFilter, dueDateFilter, TodoFilter } from './filter';
 import Scroll from '../components/Scroll';
 import Search from './Search';
 import Footer from '../components/Footer/Footer';
-// import SigninForm from '../components/SigninForm/SigninForm';
 
+const { DONE_FILTER, TODO_FILTER, DUE_DATE_FILTER } = filterConstants
 
 const mapDispatchToProps = dispatch => {
     return{
@@ -22,19 +22,21 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return{
-        todo:dueDateFilter(
-            isDoneFilter(state.todo, TODO_FILTER),DUE_DATE_FILTER,state.Search.date),
-        done:dueDateFilter(
-            isDoneFilter(state.todo, DONE_FILTER),DUE_DATE_FILTER,state.Search.date)
+        todo:TodoFilter(dueDateFilter(
+            isDoneFilter(state.todo, TODO_FILTER)
+            ,DUE_DATE_FILTER,state.Search.date),state.Search.text),
+        done:TodoFilter(dueDateFilter(
+            isDoneFilter(state.todo, DONE_FILTER)
+            ,DUE_DATE_FILTER,state.Search.date),state.Search.text)
     }
 }
 
 class Todo extends React.Component{
     render(){
-        const {onToggle,todo,done,onDelTodo} = this.props
+        const { onToggle, todo,done, onDelTodo } = this.props
         return(
             <div className=''>
-                <NavBar/>
+                
                 <AddForm/>
                 <div className='flex justify-start ml2'>
                     <Search />
@@ -46,9 +48,6 @@ class Todo extends React.Component{
                     </div>
                 </Scroll>
                 <Footer/>
-                {/* <div className='flex justify-center'>
-                    <SigninForm/>
-                </div> */}
             </div>
         )
     }

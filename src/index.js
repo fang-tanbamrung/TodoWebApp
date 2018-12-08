@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Todo from './containers/App';
-import * as serviceWorker from './serviceWorker';
-import {Provider} from 'react-redux';
-import {createStore,applyMiddleware,combineReducers} from 'redux';
-import {logger} from 'redux-logger'
-import {todo,Search,sameDay} from './reducers';
-import './index.css';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import 'tachyons'
+
+import Todo from './containers/Todo';
+import * as serviceWorker from './serviceWorker';
+import { logger } from 'redux-logger'
+import { todo, sameDay } from './reducers/todo.reducer';
+import { Search } from './reducers/search.reducer';
+import './index.css';
 
 const rootReducer = combineReducers({todo,Search,sameDay});
 const store = createStore(rootReducer,applyMiddleware(logger))
 
 ReactDOM.render(<Provider store = {store}>
-                    <Todo /> 
+                    <Todo/>
                 </Provider>
     , document.getElementById('root'));
 

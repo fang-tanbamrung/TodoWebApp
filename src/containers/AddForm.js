@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {addTodo, sameDay} from '../actions';
+import { addTodo, sameDay } from '../actions/todo.actions';
 
 const mapStateToProps = (state) => {
     return{
@@ -20,7 +20,7 @@ const AddForm = props => {
     let input;
     let date;
     return(
-        <div>
+        <div className='mt3'>
             <form className ='flex justify-center white-70 items-center' onSubmit = {e => {
                     e.preventDefault()
                     if(!input.value.trim()){
@@ -37,7 +37,7 @@ const AddForm = props => {
                     }
                 }} >
                     {`What's todo`}
-                    <input className='br-pill w-40 mr2 ml2' ref = {node => input=node}/>
+                    <input className='br2 w-40 mr2 ml2' ref = {node => input=node}/>
                     {'Due date'}
                     <input className='br-pill mr2 ml2' type='date' ref = {node => date=node}/>
                     <input className='mr1' type='checkbox' onChange={e => onCheck(e.target.checked)}/>

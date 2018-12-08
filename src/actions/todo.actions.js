@@ -1,13 +1,7 @@
-import {
-        ADD_TODO,
-        TOGGLE_STATE, 
-        DELETE_TODO,
-        SEARCH_IS_CLICK,
-        SHOW_SEARCH,
-        SAME_DAY,
-    } from './constants';
+import { todoConstants } from '../constants/todo.constant';
 
 let nextTodoId = 0
+const { ADD_TODO, TOGGLE_STATE, DELETE_TODO,SAME_DAY } = todoConstants;
 
 export const addTodo = (text,date) => {
     return{
@@ -36,19 +30,6 @@ export const sameDay = (checked) => {
     return{
         type:SAME_DAY,
         checked
-    }
-}
-
-export const isSearchClick = (date) => {
-    return {
-        type:SEARCH_IS_CLICK,
-        date
-    }
-}
-
-export const showSearh = () => {
-    return{
-        type:SHOW_SEARCH,
     }
 }
 
