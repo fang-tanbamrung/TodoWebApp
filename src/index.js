@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import 'tachyons'
 
 import Todo from './containers/Todo';
 import * as serviceWorker from './serviceWorker';
-import { logger } from 'redux-logger'
 import { todo, sameDay } from './reducers/todo.reducer';
 import { Search } from './reducers/search.reducer';
 import './index.css';
 
 const rootReducer = combineReducers({todo,Search,sameDay});
-const store = createStore(rootReducer,applyMiddleware(logger))
+const store = createStore(rootReducer)
 
 ReactDOM.render(<Provider store = {store}>
                     <Todo/>
