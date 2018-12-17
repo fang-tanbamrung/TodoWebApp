@@ -24,7 +24,7 @@ const AddForm = props => {
     
     return(
         <div className='mt3'>
-            <form className ='flex justify-center flex-column white-70 items-center' onSubmit = {e => {
+            <form className ='flex justify-center white-70 items-center' onSubmit = {e => {
                     e.preventDefault()
                     if(!input.value.trim()){
                         return
@@ -39,21 +39,15 @@ const AddForm = props => {
                         date.value = ''
                     }
                 }} >
-                <div className = 'ma1'>
                     {`What's todo`}
-                    <input className='br2 mr2 ml2' ref = {node => input=node}/>
-                </div>
-                <div className = 'ma1'>
+                    <input className='br2 w-40 mr2 ml2' ref = {node => input=node}/>
                     {'Due date'}
                     <input className='br-pill mr2 ml2' type='date' ref = {node => date=node}/>
-                </div>
-                <div>
                     <input className='mr1' type='checkbox' onChange={e => onCheck(e.target.checked)}/>
                     {'Same day'}
-                    <button className ='pointer ml2 dim br2 tc'>
-                        {'Add'}
+                    <button className ='pointer ml2 dim br2'>
+                        Add
                     </button>
-                </div>
             </form>
         </div>
     )
