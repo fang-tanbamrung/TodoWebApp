@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { toggleState, delTodo } from '../actions/todo.actions';
 import { filterConstants } from '../constants/filter.constants';
@@ -9,6 +10,7 @@ import { isDoneFilter, dueDateFilter, TodoFilter } from './filter';
 import Scroll from '../components/Scroll';
 import Search from './Search';
 import Footer from '../components/Footer/Footer';
+import { updateTodo } from '../actions/todo.actions';
 
 const { DONE_FILTER, TODO_FILTER, DUE_DATE_FILTER } = filterConstants
 
@@ -17,26 +19,31 @@ const mapDispatchToProps = dispatch => {
         
         onToggle:(id) => dispatch(toggleState(id)),
         onDelTodo:(id) => dispatch(delTodo(id)),
+        updateTodo:(email,todo) => dispatch(updateTodo(email,todo))
     }
 }
 
 const mapStateToProps = state => {
     return{
+        loggingIn:state.authentication.loggingIn,
         todo:TodoFilter(dueDateFilter(
             isDoneFilter(state.todo, TODO_FILTER)
             ,DUE_DATE_FILTER,state.Search.date),state.Search.text),
         done:TodoFilter(dueDateFilter(
             isDoneFilter(state.todo, DONE_FILTER)
-            ,DUE_DATE_FILTER,state.Search.date),state.Search.text)
+            ,DUE_DATE_FILTER,state.Search.date),state.Search.text),
+        email : state.authentication.email,
+        todos : state.todo.filter(item => item.isDelete === false)
     }
 }
 
 class Todo extends React.Component{
     render(){
-        const { onToggle, todo,done, onDelTodo } = this.props
+        const { onToggle, todo,done, onDelTodo, loggingIn, email, todos, updateTodo } = this.props
         return(
             <div className=''>
-                
+                {loggingIn?
+                <div>
                 <AddForm/>
                 <div className='flex justify-start ml2'>
                     <Search />
@@ -46,8 +53,13 @@ class Todo extends React.Component{
                         <List todo ={todo} onClickAction={onToggle} name={'TODO'} width={'46%'} onDel = {onDelTodo}/>
                         <List todo ={done} onClickAction={onToggle} name={'DONE'} width={'46%'} onDel = {onDelTodo}/>
                     </div>
+                {updateTodo(email,todos)}
                 </Scroll>
                 <Footer/>
+                </div>
+                :
+                <Redirect to='/signin'/>
+                }
             </div>
         )
     }

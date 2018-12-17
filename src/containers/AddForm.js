@@ -4,21 +4,24 @@ import { addTodo, sameDay } from '../actions/todo.actions';
 
 const mapStateToProps = (state) => {
     return{
-        checked:state.sameDay.checked
+        checked : state.sameDay.checked,
+        id : state.todo.length,
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        onAddTodo:(text,date) => dispatch(addTodo(text,date)),
+        onAddTodo:(text,date,id) => dispatch(addTodo(text,date,id)),
         onCheck:(checked) => dispatch(sameDay(checked))
     }
 }
 
+
 const AddForm = props => {
-    const {onAddTodo, checked, onCheck} = props;
+    const { onAddTodo, checked, onCheck, id } = props;
     let input;
     let date;
+    
     return(
         <div className='mt3'>
             <form className ='flex justify-center white-70 items-center' onSubmit = {e => {
@@ -30,7 +33,7 @@ const AddForm = props => {
                         alert('set due date')
                         return
                     }
-                    onAddTodo(input.value.trim(),date.value)
+                    onAddTodo(input.value.trim(),date.value,id);
                     input.value = ''
                     if(!checked){
                         date.value = ''
