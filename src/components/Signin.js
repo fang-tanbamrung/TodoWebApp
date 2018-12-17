@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { login } from '../actions/user.action';
+import { login, linkToRegister } from '../actions/user.action';
 
 const mapStateToProps = state => {
     return{
@@ -12,7 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProp = (dispatch) => {
     return{
-        login: (username,password) => dispatch(login(username,password))
+        login: (username,password) => dispatch(login(username,password)),
+        linkToRegister: () => dispatch(linkToRegister())
     }
 }
 
@@ -52,7 +53,7 @@ class Signin extends React.Component{
     render(){
         const { handleChange, handleSubmit } = this;
         const { submit, email, password } = this.state;
-        const { loggingIn } = this.props;
+        const { loggingIn, linkToRegister } = this.props;
         return(
             <div className='mt4'>
                 {loggingIn?
@@ -84,7 +85,7 @@ class Signin extends React.Component{
                             </button>
                             {console.log(loggingIn)}
                         
-                            <button className='br2'>
+                            <button className='br2' onClick = {linkToRegister}>
                                 <Link to='/register' className='no-underline black'>
                                     {'Register'}
                                 </Link>

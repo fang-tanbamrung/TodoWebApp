@@ -1,7 +1,8 @@
 import { userConstant } from '../constants/user.constants';
 
 const { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT,
-        REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } = userConstant;
+        REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, 
+        SET_REGISTER_STATE } = userConstant;
 
 const initialState = { loggingIn: false, err:{} }
 
@@ -43,6 +44,8 @@ export const register = (state = initialRegisterState, action = {}) => {
       return Object.assign({}, state,{isRegisterDone:true,state:'REGISTER_SUCCESS'})
     case REGISTER_FAILURE:
       return Object.assign({}, state,{isRegisterDone:false,state:'REGISTER_FAIL'})
+    case SET_REGISTER_STATE:
+      return Object.assign({}, state, {isRegisterDone:false})
     default :
       return state
   }

@@ -1,7 +1,8 @@
 import { userConstant } from '../constants/user.constants'
 import { todoConstants } from '../constants/todo.constant';
 const { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT,
-        REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } = userConstant;
+        REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS,
+        SET_REGISTER_STATE } = userConstant;
 const { LOAD_TODO, CLEAR_TODO } = todoConstants;
 
 const api = 'http://localhost:3000';
@@ -62,7 +63,13 @@ export const register = ( name, email, password ) => {
 
 export const logout = () => {
     return dispatch => {
-        dispatch({type:LOGOUT});
         dispatch({type:CLEAR_TODO});
+        dispatch({type:LOGOUT});
+    }
+}
+
+export const linkToRegister = () => {
+    return{
+        type: SET_REGISTER_STATE
     }
 }

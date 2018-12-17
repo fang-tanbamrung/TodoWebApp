@@ -6,8 +6,6 @@ import { logger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import 'tachyons'
 
-// import Todo from './containers/Todo';
-// import Signin from './components/Signin';
 import Header from './components/headerBar';
 import * as serviceWorker from './serviceWorker';
 import { todo, sameDay } from './reducers/todo.reducer';
@@ -19,8 +17,6 @@ const rootReducer = combineReducers({todo,Search,sameDay,authentication,register
 const store = createStore(rootReducer, applyMiddleware(logger,thunkMiddleware))
 
 ReactDOM.render(<Provider store = {store}>
-                    {/* <Todo/> */}
-                    {/* <Signin/> */}
                     <Header/>
                 </Provider>
     , document.getElementById('root'));
