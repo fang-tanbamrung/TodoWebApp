@@ -4,7 +4,7 @@ const { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT,
         REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, 
         SET_REGISTER_STATE } = userConstant;
 
-const initialState = { loggingIn: false, err:{} }
+const initialState = { loggingIn: false, err:{}, email:'' }
 
 export const authentication = (state = initialState, action) => {
   switch (action.type) {
@@ -24,7 +24,8 @@ export const authentication = (state = initialState, action) => {
       };
     case LOGOUT:
       return {
-        loggingIn: false
+        loggingIn: false,
+        email:''
       };
     default:
       return state

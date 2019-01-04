@@ -64,7 +64,7 @@ class Register extends React.Component {
                                 {'Name :'}
                             </label><br/>
                             {submit && !name &&
-                                <div className="ba br2 bg-white red">Name is required</div>
+                                <div className="ba br2 bg-white red">{'Name is required'}</div>
                             }
                             <input onChange = {handleChange} name = 'name' className = 'br2 mt1' type = 'text'/>
                         </div>
@@ -73,7 +73,7 @@ class Register extends React.Component {
                                 {'Email :'}
                             </label><br/>
                             {submit && !email &&
-                                <div className="ba br2 bg-white red">Email is required</div>
+                                <div className="ba br2 bg-white red">{'Email is required'}</div>
                             }
                             <input onChange = {handleChange} type = 'email' name = 'email' className = 'mt1 br2'/>
                         </div>
@@ -82,7 +82,7 @@ class Register extends React.Component {
                                 {'Password :'}
                             </label><br/>
                             {submit && !password &&
-                                <div className="ba br2 bg-white red">Password is required</div>
+                                <div className="ba br2 bg-white red">{'Password is required'}</div>
                             }
                             <input onChange = {handleChange} type = 'password' name = 'password' className = 'mt1 br2'/>
                         </div>
@@ -93,12 +93,12 @@ class Register extends React.Component {
                             {rpassword === password?
                             ''
                             :<div className = 'ba br2 bg-white red'>
-                                {'Password must be match'}  
+                                {'Password must match'}  
                             </div>}
                             <input onChange = {handleChange} type = 'password' name = 'rpassword' className = 'mt1 br2'/>
                         </div>
-                        <div className = 'ma2 flex justify-center'>
-                            <button className='br2'>
+                        <div className = 'ma2 flex justify-center '>
+                            <button className='br2 bg-white-70'>
                                 {'Register'}
                             </button>
                         </div>

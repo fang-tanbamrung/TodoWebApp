@@ -5,13 +5,11 @@ const { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT,
         SET_REGISTER_STATE } = userConstant;
 const { LOAD_TODO, CLEAR_TODO } = todoConstants;
 
-const api = 'http://localhost:3000';
+const api = 'https://mighty-mountain-98451.herokuapp.com';
 
 
 export const login = (email,password) => {
 
-    console.log(email);
-    console.log(password);
     return dispatch => {
         dispatch({type: LOGIN_REQUEST});
         fetch(`${api}/signin`,{

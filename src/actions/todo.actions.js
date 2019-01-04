@@ -40,7 +40,7 @@ export const loadTodo = (data) => {
     }
 }
 
-const api = 'http://localhost:3000';
+const api = 'https://mighty-mountain-98451.herokuapp.com';
 
 export const updateTodo = (email, todo) => {
     return dispatch => {

@@ -30,8 +30,6 @@ export const TodoFilter = (todo = '', text = '') => {
     if (text === '' || todo === [] ){
         return todo
     }
-    console.log(todo)
-    console.log(text)
     return todo.filter(item => { 
         return item.todo.toLowerCase().includes(text.toLowerCase())
     });

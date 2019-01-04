@@ -38,8 +38,13 @@ const mapStateToProps = state => {
 }
 
 class Todo extends React.Component{
+    componentDidUpdate(){
+        const { email, todos, updateTodo } = this.props
+        updateTodo(email,todos)
+
+    }
     render(){
-        const { onToggle, todo,done, onDelTodo, loggingIn, email, todos, updateTodo } = this.props
+        const { onToggle, todo,done, onDelTodo, loggingIn } = this.props
         return(
             <div className=''>
                 {loggingIn?
@@ -53,7 +58,6 @@ class Todo extends React.Component{
                         <List todo ={todo} onClickAction={onToggle} name={'TODO'} width={'46%'} onDel = {onDelTodo}/>
                         <List todo ={done} onClickAction={onToggle} name={'DONE'} width={'46%'} onDel = {onDelTodo}/>
                     </div>
-                {updateTodo(email,todos)}
                 </Scroll>
                 <Footer/>
                 </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { logger } from 'redux-logger';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+// import { logger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import 'tachyons'
 
@@ -13,8 +13,9 @@ import { Search } from './reducers/search.reducer';
 import { authentication, register } from './reducers/user.reducer'
 import './index.css';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({todo,Search,sameDay,authentication,register});
-const store = createStore(rootReducer, applyMiddleware(logger,thunkMiddleware))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 ReactDOM.render(<Provider store = {store}>
                     <Header/>
