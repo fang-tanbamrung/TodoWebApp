@@ -27,7 +27,10 @@ export const login = (email,password) => {
                     dispatch({type: LOGIN_SUCCESS,data});
                 }
                 if(data === 'Unauthorized')
-                {alert('Unauthorized');}
+                {
+                    dispatch({type:LOGIN_FAILURE, err:'Unauthorized'})
+                    alert('Unauthorized');
+                }
             })
             .catch(err => dispatch({type:LOGIN_FAILURE, err}))
     }
