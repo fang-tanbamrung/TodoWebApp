@@ -55,7 +55,8 @@ export const register = ( name, email, password ) => {
                     dispatch({type:REGISTER_SUCCESS});
                 }
                 if(data === 'unable to register'){
-                    alert(`This email was used`)   
+                    dispatch({type: REGISTER_FAILURE})
+                    alert(`This email was used`);   
                 }
             })
             .catch(err => dispatch({type:REGISTER_FAILURE, err}))

@@ -6,7 +6,8 @@ import { register } from '../actions/user.action';
 
 const mapStateToProps = state => {
     return{
-        isRegisterDone:state.register.isRegisterDone
+        isRegisterDone:state.register.isRegisterDone,
+        state: state.register.state
     }
 }
 
@@ -53,7 +54,7 @@ class Register extends React.Component {
     render(){
         const { handleSubmit, handleChange } = this;
         const { name, password, email, rpassword, submit } = this.state;
-        const { isRegisterDone } = this.props
+        const { isRegisterDone, state } = this.props
         return(
             <div >
                 {!isRegisterDone?
@@ -96,6 +97,14 @@ class Register extends React.Component {
                                 {'Password must match'}  
                             </div>}
                             <input onChange = {handleChange} type = 'password' name = 'rpassword' className = 'mt1 br2'/>
+                        </div>
+                        <div>
+                            {   
+                                state !== 'REGISTER_FAIL' && name && rpassword && email && password && submit && 
+                                <div className = 'flex justify-center'>
+                                    <img alt='loading-gif' src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                </div>
+                            }
                         </div>
                         <div className = 'ma2 flex justify-center '>
                             <button className='br2 bg-white-70'>
